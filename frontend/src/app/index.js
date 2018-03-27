@@ -1,16 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './css/style.css';
-import registerServiceWorker from './registerServiceWorker';
 
 import AppMouse from './components/appmouse.js'
 import AppTouch from './components/apptouch.js'
+import App from './components/app.js'
+
+var React = require('react');
+var ReactDOM = require('react-dom');
+//var App = react('components/App');
 
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import rootReducer from "./reducers/index.js"
-//var App = react('components/App');
-
 
 let store = createStore(rootReducer)
 
@@ -30,7 +29,7 @@ class LoadApp extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.isScreenTypeAvailable === false)
+    if (this.state.isScreenTypeAvailable == false)
     {
       this.root.addEventListener("touchstart", this.detectTouch);
     }
@@ -40,7 +39,7 @@ class LoadApp extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.isScreenTypeAvailable === true)
+    if (this.state.isScreenTypeAvailable == true)
     {
       this.root.removeEventListener("touchstart", this.detectTouch);
     }
@@ -59,8 +58,8 @@ class LoadApp extends React.Component {
   render() {
     return (
      <div ref={elem => this.root = elem} style={{'width': '100%'}}>
-      { (this.state.isScreenTypeAvailable === false)&&<AppMouse/> }
-      { (this.state.isScreenTypeAvailable === true && this.state.screenType === screenType.Touch) &&<AppTouch/> }
+      { (this.state.isScreenTypeAvailable == false)&&<AppMouse/> }
+      { (this.state.isScreenTypeAvailable == true && this.state.screenType == screenType.Touch) &&<AppTouch/> }
      </div>
     );
   }
@@ -70,7 +69,5 @@ ReactDOM.render(
   <Provider store={store}>
     <LoadApp />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('app')
 );
-
-registerServiceWorker();
