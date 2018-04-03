@@ -1,10 +1,10 @@
 from .settings import *
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "assets"),
+    os.path.join(BASE_DIR, "prod-static"),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "prod-static")
+# STATIC_ROOT = os.path.join(BASE_DIR, "prod-static")
 
 WEBPACK_LOADER = {
     'DEFAULT': {
