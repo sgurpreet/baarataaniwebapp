@@ -16,7 +16,7 @@ def increment_game_number():
 class Game(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     game_id = models.CharField(max_length = 25, default = increment_game_number, editable=False)
-    client_game_id = models.CharField(max_length=100)
+    client_game_id = models.CharField(max_length=100, default='client_id_not_set')
 
     class Meta:
         ordering = ('created',)
@@ -26,8 +26,8 @@ class GameMove(models.Model):
     move_from = models.IntegerField(validators=[MaxValueValidator(25), MinValueValidator(1)])
     move_to = models.IntegerField(validators=[MaxValueValidator(25), MinValueValidator(1)])
     player_id = models.IntegerField(validators=[MaxValueValidator(2), MinValueValidator(1)])
-    pattern_before_move = models.IntegerField(validators=[MaxValueValidator(2), MinValueValidator(1)])
-    game_pk_id = models.ForeignKey('Game', on_delete=models.CASCADE)
-    
+    pattern_before_move = models.CharField(max_length=25)
+    game = models.ForeignKey(Game, related_name='moves', on_delete=models.CASCADE)
+
     class Meta:
         ordering = ('created',)
