@@ -26,7 +26,7 @@ const StoneHolders = (state = generateStoneHolders(), action) => {
     case ActionTypes.STARTGAME:
 
       return state.map(stoneHolder => {
-        if(stoneHolder.positionId === 13)
+        if(stoneHolder.positionId === 13)// || stoneHolder.positionId > 14)
           return new StoneHolder (stoneHolder.positionId, StoneHolderStatus.EMPTY) ;
         else if(stoneHolder.positionId < 13)
           return new StoneHolder (stoneHolder.positionId, StoneHolderStatus.PLAYER1)

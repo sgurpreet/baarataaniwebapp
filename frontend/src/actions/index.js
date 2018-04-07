@@ -1,21 +1,45 @@
 import {ActionTypes} from '../helpers/constants.js'
+import {generateGuid, generatePattern} from '../helpers/utils.js'
 
 const startGame = (startGame) => {
 
-    return {
-        type : ActionTypes.STARTGAME,
-        payload : startGame
-    }
+  const clientGameId = generateGuid();
 
+  return dispatch => {
+      const headers = {"Content-Type": "application/json"};
+      const method = "POST"
+      const body = JSON.stringify({"client_game_id": clientGameId})
+      console.log(body)
+      return fetch("/games/", {headers, method: method, body })
+          .then(res => res.json())
+          .then(game => {
+              return dispatch({
+                type : ActionTypes.STARTGAME,
+                payload : { ...startGame, id: game.game_id, clientGameId: game.client_game_id}
+              })
+          })
+  }
 }
 
 
 const restartGame = () => {
 
-    return {
-        type : ActionTypes.RESTARTGAME,
-        payload : null
-    }
+  const clientGameId = generateGuid();
+
+  return dispatch => {
+      const headers = {"Content-Type": "application/json"};
+      const method = "POST"
+      const body = JSON.stringify({"client_game_id": clientGameId})
+      console.log(body)
+      return fetch("/games/", {headers, method: method, body })
+          .then(res => res.json())
+          .then(game => {
+              return dispatch({
+                type : ActionTypes.RESTARTGAME,
+                payload : { id: game.game_id, clientGameId: game.client_game_id}
+              })
+          })
+  }
 
 }
 
@@ -58,13 +82,73 @@ const closeSlider = () => {
 
 
 
-const stoneDropped = (sourcePositionId, sourceStatus, targetPositionId, vacantPositionId) => {
+const stoneDropped = (sourcePositionId, sourceStatus, targetPositionId,
+        vacantPositionId) => {
 
-    return {
-        type : ActionTypes.STONEDROPPED,
-        payload : {sourcePositionId, sourceStatus, targetPositionId, vacantPositionId}
-    }
+  return (dispatch, getState) => {
+    dispatch(
+      {
+          type : ActionTypes.STONEDROPPED,
+          payload : {sourcePositionId, sourceStatus, targetPositionId, vacantPositionId}
+      }
+    )
 
+    const {players, stoneHolders} = getState()
+    const patternBeforeMove = generatePattern(stoneHolders)
+
+    const move = { movePlayerId: sourceStatus,
+            patternBeforeMove: patternBeforeMove,
+            moveFromPositonId: sourcePositionId,
+            moveToPositionId: targetPositionId,
+            vacantPositionId: vacantPositionId,
+            playerId1Score: players[0].score,
+            playerId2Score: players[1].score
+          }
+    dispatch(
+      {
+          type : ActionTypes.RECORDMOVE,
+          payload : {...move}
+      }
+    )
+
+    if(vacantPositionId != null)
+    {
+      setTimeout(() => {
+            const {gameMoves, currentGame} = getState()
+            const startOfPendingMoveIndex = gameMoves.lastMovePushIndex + 1
+            const lastMovePushIndex = gameMoves.moves.length -1
+            console.log(startOfPendingMoveIndex,lastMovePushIndex)
+            let movesToBePushed = []
+            for(let index = startOfPendingMoveIndex; index <= lastMovePushIndex; index++ )
+              movesToBePushed.push( {move_from: gameMoves.moves[index].moveFromPositonId,
+                                     move_to: gameMoves.moves[index].moveToPositionId,
+                                     player_id: gameMoves.moves[index].movePlayerId,
+                                     pattern_before_move: gameMoves.moves[index].patternBeforeMove,
+                                     player_id_1_Score: gameMoves.moves[index].playerId1Score,
+                                     player_id_2_Score: gameMoves.moves[index].playerId2Score,
+                                     })
+
+            const headers = {"Content-Type": "application/json"};
+            const method = "POST"
+            const body = JSON.stringify({game_id: currentGame.id,
+                                         client_game_id: currentGame.gameId,
+                                         moves: movesToBePushed} )
+            console.log(body)
+            return fetch("/games/moves/", {headers, method: method, body })
+                .then(res => res.json())
+                .then(game => {
+                    return dispatch({
+                      type : ActionTypes.RECORDEDMOVEPUSHED,
+                      payload : lastMovePushIndex
+                    })
+                })
+
+
+          }, 100);
+
+      }
+
+  }
 }
 
 const gameCompleted = (winnerPlayerId) => {

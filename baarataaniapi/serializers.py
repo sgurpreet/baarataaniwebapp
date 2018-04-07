@@ -4,7 +4,8 @@ from baarataaniapi.models import Game, GameMove
 class GameMoveSerializer(serializers.ModelSerializer):
     class Meta:
         model = GameMove
-        fields = ('created','move_from','move_to','player_id','pattern_before_move')
+        fields = ('created','move_from','move_to','player_id',
+            'pattern_before_move', 'player_id_1_Score', 'player_id_2_Score')
 
 
 class GameSerializer(serializers.ModelSerializer):

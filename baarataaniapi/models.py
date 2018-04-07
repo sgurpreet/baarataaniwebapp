@@ -27,6 +27,9 @@ class GameMove(models.Model):
     move_to = models.IntegerField(validators=[MaxValueValidator(25), MinValueValidator(1)])
     player_id = models.IntegerField(validators=[MaxValueValidator(2), MinValueValidator(1)])
     pattern_before_move = models.CharField(max_length=25)
+    player_id_1_Score = models.IntegerField(default=0, validators=[MaxValueValidator(25), MinValueValidator(0)])
+    player_id_2_Score = models.IntegerField(default=0, validators=[MaxValueValidator(25), MinValueValidator(0)])
+
     game = models.ForeignKey(Game, related_name='moves', on_delete=models.CASCADE)
 
     class Meta:

@@ -7,7 +7,7 @@ const findAllowedRouteBasedonCurrentState = (sourcePositionId,targetPositionId) 
 }
 
 const checkMoveValidStepAndCenterPosition = (moveRoute,stoneHolders,sourcePositionId,
-                                                targetPositionId, sourceStatus, gameStatus) => {
+                                      targetPositionId, sourceStatus, gameStatus, lastGameMove) => {
 
 
   const sourceIndex = moveRoute.indexOf(sourcePositionId);
@@ -31,8 +31,14 @@ const checkMoveValidStepAndCenterPosition = (moveRoute,stoneHolders,sourcePositi
 
     if(betweenStoneHolder.status === sourceStatus)
       return { valid: false, centerPositionId: null } ;
-    else {
+    else if ( lastGameMove.turnScoreCount == 0 ||
+              (lastGameMove.turnScoreCount > 0 &&
+                sourcePositionId === lastGameMove.lastMoveTargetPositionId)){
       return { valid: true, centerPositionId: betweenStoneHolder.positionId } ;
+    }
+    else
+    {
+      return { valid: false, centerPositionId: null } ;
     }
 
   }
@@ -40,7 +46,8 @@ const checkMoveValidStepAndCenterPosition = (moveRoute,stoneHolders,sourcePositi
 }
 
 
-const canMakeMove = (stoneHolders, sourcePositionId, sourceStatus, targetPositionId, gameStatus) => {
+const canMakeMove = (stoneHolders, sourcePositionId, sourceStatus,
+      targetPositionId, gameStatus, lastGameMove) => {
 
   //If occupied return false;
   if(stoneHolders[targetPositionId-1].status !== StoneHolderStatus.EMPTY)
@@ -56,7 +63,7 @@ const canMakeMove = (stoneHolders, sourcePositionId, sourceStatus, targetPositio
 
     // eslint-disable-next-line
     const {valid, centerPositionId} = checkMoveValidStepAndCenterPosition(moveRoute,stoneHolders, sourcePositionId,
-                                                    targetPositionId, sourceStatus, gameStatus)
+                                                    targetPositionId, sourceStatus, gameStatus, lastGameMove)
 
     return valid;
 
@@ -67,7 +74,8 @@ const canMakeMove = (stoneHolders, sourcePositionId, sourceStatus, targetPositio
 
 }
 
-const moveScorePosition = (stoneHolders, sourcePositionId, sourceStatus, targetPositionId, gameStatus) => {
+const moveScorePosition = (stoneHolders, sourcePositionId, sourceStatus,
+                          targetPositionId, gameStatus, lastGameMove) => {
 
   //If occupied return false;
   if(stoneHolders[targetPositionId-1].status !== StoneHolderStatus.EMPTY)
@@ -83,7 +91,7 @@ const moveScorePosition = (stoneHolders, sourcePositionId, sourceStatus, targetP
 
     // eslint-disable-next-line
     const {valid, centerPositionId} = checkMoveValidStepAndCenterPosition(moveRoute,stoneHolders,sourcePositionId,
-                                                    targetPositionId, sourceStatus, gameStatus)
+                                                    targetPositionId, sourceStatus, gameStatus, lastGameMove)
 
     return centerPositionId;
 
@@ -94,13 +102,17 @@ const moveScorePosition = (stoneHolders, sourcePositionId, sourceStatus, targetP
 }
 
 
-const isGameCompleted = (stoneHolders) => {
+const isGameCompleted = (stoneHolders, vacantPositionId) => {
 
-  if(stoneHolders.filter( _ => _.status === StoneHolderStatus.PLAYER1).length === 0)
+
+  if(stoneHolders.filter( _ => _.status === StoneHolderStatus.PLAYER2).length === 1
+      && StoneHolderStatus.PLAYER2 === stoneHolders[vacantPositionId - 1].status)
   {
+    console.log(StoneHolderStatus.PLAYER1)
     return {gameStatus: GameStatus.COMPLETED, winnerPlayerId: StoneHolderStatus.PLAYER1};
   }
-  else if(stoneHolders.filter( _ => _.status === StoneHolderStatus.PLAYER2).length === 0)
+  else if(stoneHolders.filter( _ => _.status === StoneHolderStatus.PLAYER1).length === 1
+      && StoneHolderStatus.PLAYER1 === stoneHolders[vacantPositionId - 1].status)
   {
     return {gameStatus: GameStatus.COMPLETED, winnerPlayerId: StoneHolderStatus.PLAYER2};
   }

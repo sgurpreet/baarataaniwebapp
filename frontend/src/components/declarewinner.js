@@ -12,7 +12,7 @@ class DeclareWinner extends React.Component {
       &&  this.props.currentGame.status === GameStatus.COMPLETED)
     {
 
-      const winner = this.props.players[this.props.currentGame.winnerPlayerId];
+      const winner = this.props.players[this.props.currentGame.winnerPlayerId - 1];
       return (
           <div className="row">
             Congratulations {winner.playerName}, you have won the game!

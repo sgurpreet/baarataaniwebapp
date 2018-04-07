@@ -17,7 +17,7 @@ const stoneTarget = {
     //console.log("Can Drop Check.");
 
     return canMakeMove(props.stoneHolders, source.stoneHolder.positionId,
-              source.stoneHolder.status, props.positionId, props.currentGame.status)
+              source.stoneHolder.status, props.positionId, props.currentGame.status, props.gameMoveState)
 
   },
   drop(props, monitor) {
@@ -28,15 +28,18 @@ const stoneTarget = {
     //console.log("Dropped1");
 
     const vacantPositionId = moveScorePosition(props.stoneHolders, source.stoneHolder.positionId,
-              source.stoneHolder.status, props.positionId, props.currentGame.status)
+              source.stoneHolder.status, props.positionId, props.currentGame.status, props.gameMoveState)
 
       props.stoneDropped(source.stoneHolder.positionId, source.stoneHolder.status, props.positionId, vacantPositionId);
 
-    const {gameStatus, winnerPlayerId} = isGameCompleted(props.stoneHolders);
-
-    if(gameStatus === GameStatus.COMPLETED)
+    if (vacantPositionId !=  null)
     {
-      props.gameCompleted(winnerPlayerId);
+      const {gameStatus, winnerPlayerId} = isGameCompleted(props.stoneHolders, vacantPositionId);
+
+      if(gameStatus === GameStatus.COMPLETED)
+      {
+        props.gameCompleted(winnerPlayerId);
+      }
     }
 
   }
@@ -108,7 +111,8 @@ StoneHolder.propTypes = {
 const mapStateToProps = state => {
   return {
     stoneHolders: state.stoneHolders,
-    currentGame: state.currentGame
+    currentGame: state.currentGame,
+    gameMoveState: state.gameMoveState,
   }
 }
 

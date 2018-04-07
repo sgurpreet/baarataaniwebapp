@@ -1,26 +1,21 @@
 import {ActionTypes,GameStatus} from '../helpers/constants.js'
 
 
-const guid = () => {
-    function _p8(s) {
-        var p = (Math.random().toString(16)+"000000000").substr(2,8);
-        return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;
-    }
-    return _p8() + _p8(true) + _p8(true) + _p8();
-}
+
 
 class Game {
-  constructor(gameId,status,winnerPlayerId){
+  constructor(gameId,status,winnerPlayerId, id){
     this.gameId = gameId;
     this.status = status;
     this.winnerPlayerId = winnerPlayerId;
+    this.id = id;
   }
 
 }
 
-const createGame = () =>
+const createGame = (id,clientGameId) =>
 {
-  return new Game (guid(),GameStatus.INPROGRESS, -1);
+  return new Game (clientGameId,GameStatus.INPROGRESS, -1, id);
 }
 
 const CurrentGame = (state = null, action) => {
@@ -30,17 +25,19 @@ const CurrentGame = (state = null, action) => {
     case ActionTypes.RESTARTGAME:
     case ActionTypes.STARTGAME:
 
-      return createGame();
+      return createGame(action.payload.id, action.payload.clientGameId);
 
     case ActionTypes.GAMECOMPLETED:
 
-        return new Game( state.gameId,GameStatus.COMPLETED, action.payload.winnerPlayerId);
+        return new Game( state.gameId,GameStatus.COMPLETED,
+                      action.payload.winnerPlayerId, state.id);
 
     case ActionTypes.STONEDROPPED:
 
       if(action.payload.vacantPositionId >= 1)
       {
-          return new Game( state.gameId,GameStatus.INPROGRESSCHANGETURN, action.payload.winnerPlayerId);
+          return new Game( state.gameId,GameStatus.INPROGRESSCHANGETURN,
+                        action.payload.winnerPlayerId, state.id);
       }
       else {
         return state;
@@ -48,7 +45,8 @@ const CurrentGame = (state = null, action) => {
 
     case ActionTypes.CHANGETURN:
 
-        return new Game( state.gameId,GameStatus.INPROGRESS, action.payload.winnerPlayerId);
+        return new Game( state.gameId,GameStatus.INPROGRESS,
+                      action.payload.winnerPlayerId, state.id);
 
     default:
       return state;

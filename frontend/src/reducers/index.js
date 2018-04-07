@@ -5,13 +5,17 @@ import {StoneHolders} from "./stoneholder";
 import {CurrentGame} from "./game.js";
 import {SliderController} from './slider.js'
 import {GameDrawMeta} from './gamedrawmeta.js'
+import {GameMoves} from './gamemoves.js'
+import {GameMoveState} from './gamemovestate.js'
 
 const rootReducer = combineReducers({
   players: Players,
   stoneHolders: StoneHolders,
   currentGame: CurrentGame,
   sliderController: SliderController,
-  gameDrawMeta: GameDrawMeta
+  gameDrawMeta: GameDrawMeta,
+  gameMoves: GameMoves,
+  gameMoveState: GameMoveState
 });
 
 export default rootReducer;

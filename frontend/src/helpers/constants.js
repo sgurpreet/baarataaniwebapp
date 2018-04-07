@@ -22,7 +22,9 @@ const ActionTypes = {
     OPENEDSLIDER: 'opened slider',
     CLOSESLIDER: 'close slider',
     SAVESETTINGS: 'save settings',
-    SAVEDRAWMETADATA: 'Save draw meta data'
+    SAVEDRAWMETADATA: 'Save draw meta data',
+    RECORDMOVE: 'Record a move',
+    RECORDEDMOVEPUSHED: 'Recorded move pushed',
 }
 
 const GameStatus = {

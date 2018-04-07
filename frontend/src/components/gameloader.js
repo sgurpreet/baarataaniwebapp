@@ -32,9 +32,9 @@ const stoneHolderFn = (stoneHolder, player, drawMetaData, actualLineWidth) => {
 }
 
 class GameLoader extends React.Component {
-  
-  gameLoader() {
 
+
+  gameLoader() {
     const allPlayers = this.props.players;
 
     let drawMetaData = this.props.drawMetaData;
@@ -64,7 +64,8 @@ const mapStateToProps = state => {
   return {
     stoneHolders: state.stoneHolders,
     players: state.players,
-    currentGame: state.currentGame
+    currentGame: state.currentGame,
+    gameMoves: state.gameMoves,
   }
 }
 
