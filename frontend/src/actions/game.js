@@ -51,8 +51,16 @@ const checkMoveValidStepAndCenterPosition = (moveRoute,stoneHolders,sourcePositi
 }
 
 
-const canMakeMove = (stoneHolders, sourcePositionId, sourceStatus,
+const canMakeMove = (player, stoneHolders, sourcePositionId, sourceStatus,
       targetPositionId, gameStatus, lastGameMove) => {
+
+  //console.log(player)
+  //console.log(lastGameMove)
+
+  if(player.playerId !== sourceStatus || player.turn === false)
+    return false;
+
+
 
   //If occupied return false;
   if(stoneHolders[targetPositionId-1].status !== StoneHolderStatus.EMPTY)

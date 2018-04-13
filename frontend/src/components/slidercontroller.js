@@ -5,7 +5,9 @@ import {bindActionCreators} from 'redux';
 import {SliderChild} from '../helpers/constants.js'
 import {StartGameForm} from './startgameform.js'
 import {HelpForm} from './helpform.js'
-import {closeSlider, openedSlider, startGame} from '../actions/index.js'
+import DeclareWinner from './declarewinner.js'
+import {restartGame, closeSlider, openedSlider, startGame} from '../actions/index.js'
+
 
 
 class SliderController extends React.Component {
@@ -143,6 +145,19 @@ class SliderController extends React.Component {
                 )
             }
 
+            { this.props.sliderController.openSlider === true
+              && this.props.sliderController.sliderChild === SliderChild.DECLAREWINNER
+              && (
+                      <div style ={{'textAlign': 'center'}} className="row">
+                        <DeclareWinner/>
+                        <div className="col-12 row slider-modal-row" style={{"textAlign": "center", "marginTop": "25px", "marginBottom": "25px"}}>
+                          <input type="button" onClick={() => this.props.restartGame()} value="Restart"/>
+                          <input type="button" onClick={() => this.props.closeSlider()} value="Close"/>
+                        </div>
+                      </div>
+                )
+            }
+
           </div>
         )
   }
@@ -167,7 +182,8 @@ const mapStateToProps = (state,ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({closeSlider: closeSlider,
                             openedSlider: openedSlider,
-                            startGame: startGame}, dispatch);
+                            startGame: startGame,
+                            restartGame: restartGame}, dispatch);
 }
 
 export default connect(

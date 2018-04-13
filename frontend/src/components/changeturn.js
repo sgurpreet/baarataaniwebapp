@@ -8,7 +8,7 @@ const changeTurnSection = ( {currentGame, gameDrawMeta, onChangeTurnClick} ) => 
     const lineWidth = gameDrawMeta != null? gameDrawMeta.lineWidth > 2.5? 2.5 : gameDrawMeta.lineWidth: null;;
 
     //let changeButtonClicked = false;
-    const autoChangeInSeconds = 9;
+    const autoChangeInSeconds = 5;
     return (currentGame != null && currentGame.status === GameStatus.INPROGRESSCHANGETURN)?
         (<div className='change-turn'>
           <button style = {{

@@ -26,6 +26,7 @@ const ActionTypes = {
     RECORDMOVE: 'Record a move',
     RECORDEDMOVEPUSHED: 'Recorded move pushed',
     OPENHELPFORM: 'Help form',
+    ISDRAGGING: 'Is dragging'
 }
 
 const GameStatus = {
@@ -56,6 +57,8 @@ const SliderChild = {
   STARTGAME: 'start game',
   SETTINGS: 'settings',
   HELP: 'help',
+  DECLAREWINNER: 'Declare winner',
+  RESTARTGAME: 'Restart game',
 
 }
 

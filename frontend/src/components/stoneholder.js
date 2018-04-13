@@ -16,7 +16,11 @@ const stoneTarget = {
 
     //console.log("Can Drop Check.");
 
-    return canMakeMove(props.stoneHolders, source.stoneHolder.positionId,
+    console.log(props.dragDropState.isDragging)
+    if(props.dragDropState.isDragging === false)
+      return false;
+
+    return canMakeMove(source.player, props.stoneHolders, source.stoneHolder.positionId,
               source.stoneHolder.status, props.positionId, props.currentGame.status, props.gameMoveState)
 
   },
@@ -113,6 +117,7 @@ const mapStateToProps = state => {
     stoneHolders: state.stoneHolders,
     currentGame: state.currentGame,
     gameMoveState: state.gameMoveState,
+    dragDropState: state.dragDropState
   }
 }
 

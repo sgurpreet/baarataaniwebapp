@@ -88,7 +88,14 @@ const closeSlider = () => {
 
 }
 
+const isStoneDragging = () => {
 
+    return {
+        type : ActionTypes.ISDRAGGING,
+        payload : null
+    }
+
+}
 
 
 const stoneDropped = (sourcePositionId, sourceStatus, targetPositionId,
@@ -190,5 +197,5 @@ const saveGameDrawMetaData = (gameDrawMeta) => {
 
 export {startGame, restartGame, stoneDropped,gameCompleted,changeTurn,
         openStartGameSlider, openSettingSlider, openedSlider, closeSlider,
-        saveGameDrawMetaData, openHelpSlider
+        saveGameDrawMetaData, openHelpSlider, isStoneDragging
 }

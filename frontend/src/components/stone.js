@@ -1,8 +1,10 @@
 import React from 'react';
-
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import {ItemTypes} from '.././helpers/constants.js'
 import { DragSource } from 'react-dnd';
+import {isStoneDragging} from '../actions/index.js'
 
 
 const stoneSource = {
@@ -11,8 +13,10 @@ const stoneSource = {
     return props.player.turn;
   },
   beginDrag(props) {
-    const { stoneHolder } = props;
-    return {stoneHolder};
+    console.log('IsDragging');
+    props.isStoneDragging();
+    const { stoneHolder, player } = props;
+    return {stoneHolder, player};
   }
 };
 
@@ -66,4 +70,15 @@ Stone.propTypes = {
   isDragging: PropTypes.bool.isRequired
 };
 
-export default DragSource(ItemTypes.STONE, stoneSource, collect)(Stone);
+const mapStateToProps = state => {
+  return {
+    dragDropState: state.dragDropState,
+  }
+}
+
+ const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({isStoneDragging: isStoneDragging}, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(DragSource(ItemTypes.STONE, stoneSource, collect)(Stone));

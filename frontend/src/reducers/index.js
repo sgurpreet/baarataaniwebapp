@@ -7,6 +7,7 @@ import {SliderController} from './slider.js'
 import {GameDrawMeta} from './gamedrawmeta.js'
 import {GameMoves} from './gamemoves.js'
 import {GameMoveState} from './gamemovestate.js'
+import {DragDropState} from './dragdropstate.js'
 
 const rootReducer = combineReducers({
   players: Players,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   sliderController: SliderController,
   gameDrawMeta: GameDrawMeta,
   gameMoves: GameMoves,
-  gameMoveState: GameMoveState
+  gameMoveState: GameMoveState,
+  dragDropState: DragDropState
 });
 
 export default rootReducer;

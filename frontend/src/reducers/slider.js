@@ -38,6 +38,10 @@ const SliderController = (state = initSlider(), action) => {
         return new Slider(true,false,SliderChild.HELP);
       }
 
+    case ActionTypes.GAMECOMPLETED:
+
+      return new Slider(true,false,SliderChild.DECLAREWINNER);
+
     case ActionTypes.OPENEDSLIDER:
 
         if(state.isSliderOpen === true)

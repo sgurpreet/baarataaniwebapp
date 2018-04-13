@@ -14,7 +14,7 @@ class DeclareWinner extends React.Component {
 
       const winner = this.props.players[this.props.currentGame.winnerPlayerId - 1];
       return (
-          <div className="row">
+          <div style ={{'marginTop': '15px', 'fontSize': '1.5em', 'fontWeight': 'bold'}} className="row">
             Congratulations {winner.playerName}, you have won the game!
           </div>
         )
