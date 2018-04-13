@@ -16,7 +16,8 @@ const checkMoveValidStepAndCenterPosition = (moveRoute,stoneHolders,sourcePositi
   const movedStepsCount = Math.abs(targetIndex - sourceIndex);
 
   if(movedStepsCount === 1
-    && gameStatus === GameStatus.INPROGRESS) //Allowed only if current turn first move
+    && gameStatus === GameStatus.INPROGRESS
+    && lastGameMove.turnScoreCount === 0) //Allowed only if current turn first move
   {
     return { valid: true, centerPositionId: null } ;
   }
@@ -24,14 +25,15 @@ const checkMoveValidStepAndCenterPosition = (moveRoute,stoneHolders,sourcePositi
   {
     return { valid: false, centerPositionId: null } ;
   }
-  else
+  else if(movedStepsCount === 2)
   {
     const betweenStoneHolder = targetIndex > sourceIndex? stoneHolders[moveRoute[sourceIndex + 1]-1]
                                         : stoneHolders[moveRoute[targetIndex + 1]-1]; // center position
 
-    if(betweenStoneHolder.status === sourceStatus)
+    if(betweenStoneHolder.status === sourceStatus
+        || betweenStoneHolder.status === StoneHolderStatus.EMPTY)
       return { valid: false, centerPositionId: null } ;
-    else if ( lastGameMove.turnScoreCount == 0 ||
+    else if ( lastGameMove.turnScoreCount === 0 ||
               (lastGameMove.turnScoreCount > 0 &&
                 sourcePositionId === lastGameMove.lastMoveTargetPositionId)){
       return { valid: true, centerPositionId: betweenStoneHolder.positionId } ;
@@ -41,6 +43,9 @@ const checkMoveValidStepAndCenterPosition = (moveRoute,stoneHolders,sourcePositi
       return { valid: false, centerPositionId: null } ;
     }
 
+  }
+  else {
+    return { valid: false, centerPositionId: null } ;
   }
 
 }

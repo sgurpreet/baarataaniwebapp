@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 
 import {SliderChild} from '../helpers/constants.js'
 import {StartGameForm} from './startgameform.js'
+import {HelpForm} from './helpform.js'
 import {closeSlider, openedSlider, startGame} from '../actions/index.js'
 
 
@@ -112,7 +113,7 @@ class SliderController extends React.Component {
 
     if(this.props.sliderController.openSlider === true)
     {
-      styleMaxHeight = "1000px";
+      styleMaxHeight = "2000px";
     }
 
     return (
@@ -127,6 +128,18 @@ class SliderController extends React.Component {
                             <input type="button" onClick={() => this.props.closeSlider()} value="Cancel"/>
                           </div>
                         </form>
+                )
+            }
+
+            { this.props.sliderController.openSlider === true
+              && this.props.sliderController.sliderChild === SliderChild.HELP
+              && (
+                      <div className="row">
+                        <HelpForm></HelpForm>
+                        <div className="col-12 row slider-modal-row" style={{"textAlign": "center", "marginTop": "25px", "marginBottom": "25px"}}>
+                          <input type="button" onClick={() => this.props.closeSlider()} value="Close"/>
+                        </div>
+                      </div>
                 )
             }
 

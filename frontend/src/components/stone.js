@@ -21,12 +21,18 @@ const stoneSource = {
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
   }
 }
 
 
 class Stone extends React.Component {
+
+  componentDidMount() {
+
+
+  }
 
   render() {
       // eslint-disable-next-line
@@ -46,7 +52,8 @@ class Stone extends React.Component {
                             'marginLeft': 4*lineWidth,
                             'verticalAlign': 'middle',
                             'background':radialGradient,
-                        opacity: isDragging ? 0.5 : 1 }}
+                        opacity: isDragging ? 0.5 : 1,
+                        transform: isDragging ? 'scale(1.0)' : 'scale(1.0)'}}
               stoneid = {player.stoneId}
               playerid = {player.playerId}></figure>
       );

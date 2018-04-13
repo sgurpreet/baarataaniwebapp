@@ -61,6 +61,15 @@ const openSettingSlider = () => {
 
 }
 
+const openHelpSlider = () => {
+
+  return {
+      type : ActionTypes.OPENHELPFORM,
+      payload : null
+  }
+
+}
+
 const openedSlider = () => {
 
     return {
@@ -181,5 +190,5 @@ const saveGameDrawMetaData = (gameDrawMeta) => {
 
 export {startGame, restartGame, stoneDropped,gameCompleted,changeTurn,
         openStartGameSlider, openSettingSlider, openedSlider, closeSlider,
-        saveGameDrawMetaData
+        saveGameDrawMetaData, openHelpSlider
 }

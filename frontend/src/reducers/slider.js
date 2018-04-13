@@ -28,6 +28,16 @@ const SliderController = (state = initSlider(), action) => {
         return new Slider(true,false,SliderChild.STARTGAME);
       }
 
+    case ActionTypes.OPENHELPFORM:
+
+      if(state.isSliderOpen === true)
+      {
+        return state;
+      }
+      else {
+        return new Slider(true,false,SliderChild.HELP);
+      }
+
     case ActionTypes.OPENEDSLIDER:
 
         if(state.isSliderOpen === true)
@@ -44,7 +54,9 @@ const SliderController = (state = initSlider(), action) => {
         return new Slider(false,false,state.sliderChild);
 
 
-
+    case ActionTypes.RESTARTGAME:
+    case ActionTypes.OPENSETTINGFORM:
+      return initSlider()
     default:
       return state;
 

@@ -25,6 +25,7 @@ const ActionTypes = {
     SAVEDRAWMETADATA: 'Save draw meta data',
     RECORDMOVE: 'Record a move',
     RECORDEDMOVEPUSHED: 'Recorded move pushed',
+    OPENHELPFORM: 'Help form',
 }
 
 const GameStatus = {
@@ -53,7 +54,8 @@ const AllowedMovesSequence = [[1,2,3,4,5],
 const SliderChild = {
 
   STARTGAME: 'start game',
-  SETTINGS: 'settings'
+  SETTINGS: 'settings',
+  HELP: 'help',
 
 }
 

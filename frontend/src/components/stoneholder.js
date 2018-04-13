@@ -70,8 +70,8 @@ class StoneHolder extends React.Component {
     const stoneHolderHeight =16*lineWidth;
     const stoneHolderWidth = 16*lineWidth;
 
-    const top =  verticalGap * Math.trunc((this.props.positionId-1)/5) + 10 - stoneHolderHeight/4 - lineWidth;
-    const left = horizontalGap * Math.trunc((this.props.positionId-1)%5) - stoneHolderWidth/4-lineWidth;
+    const top =  verticalGap * Math.trunc((this.props.positionId-1)/5) + 10 - stoneHolderHeight/4 - lineWidth/2;
+    const left = horizontalGap * Math.trunc((this.props.positionId-1)%5) - stoneHolderWidth/4 -lineWidth/2;
 
     return connectDropTarget(
 
