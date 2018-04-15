@@ -4,7 +4,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "prod-static"),
 ]
 
-# STATIC_ROOT = os.path.join(BASE_DIR, "prod-static")
+#STATIC_ROOT = os.path.join(BASE_DIR, "prod-static")
 
 WEBPACK_LOADER = {
     'DEFAULT': {
