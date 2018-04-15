@@ -121,7 +121,7 @@ const isGameCompleted = (stoneHolders, vacantPositionId) => {
   if(stoneHolders.filter( _ => _.status === StoneHolderStatus.PLAYER2).length === 1
       && StoneHolderStatus.PLAYER2 === stoneHolders[vacantPositionId - 1].status)
   {
-    console.log(StoneHolderStatus.PLAYER1)
+    //console.log(StoneHolderStatus.PLAYER1)
     return {gameStatus: GameStatus.COMPLETED, winnerPlayerId: StoneHolderStatus.PLAYER1};
   }
   else if(stoneHolders.filter( _ => _.status === StoneHolderStatus.PLAYER1).length === 1

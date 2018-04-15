@@ -32,7 +32,7 @@ const GameMoves = (state = { lastMovePushIndex: -1, moves: []}, action) => {
       currentState.moves.push(new Move(movePlayerId, patternBeforeMove, moveFromPositonId, moveToPositionId,
                     vacantPositionId == null? 0: vacantPositionId, playerId1Score, playerId2Score))
 
-      console.log('recording for move finished.')
+      //console.log('recording for move finished.')
       return currentState
 
     case ActionTypes.RECORDEDMOVEPUSHED:

@@ -16,7 +16,7 @@ const stoneTarget = {
 
     //console.log("Can Drop Check.");
 
-    console.log(props.dragDropState.isDragging)
+    //console.log(props.dragDropState.isDragging)
     if(props.dragDropState.isDragging === false)
       return false;
 

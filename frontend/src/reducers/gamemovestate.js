@@ -14,7 +14,7 @@ const GameMoveState = (state = initState, action) => {
 
     case ActionTypes.STONEDROPPED:
 
-      console.log('turn ')
+      //console.log('turn ')
       return {
         lastMovePlayerId : action.payload.sourceStatus,
         lastMoveSourcePositionId : action.payload.sourcePositionId,

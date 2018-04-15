@@ -10,7 +10,7 @@ const DragDropState = (state = initState, action) => {
   switch (action.type) {
 
     case ActionTypes.ISDRAGGING:
-      console.log('Dragging set');
+      //console.log('Dragging set');
       return {isDragging: true}
 
     case ActionTypes.STONEDROPPED:

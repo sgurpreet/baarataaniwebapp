@@ -9,7 +9,7 @@ const startGame = (startGame) => {
       const headers = {"Content-Type": "application/json"};
       const method = "POST"
       const body = JSON.stringify({"client_game_id": clientGameId})
-      console.log(body)
+      //console.log(body)
       return fetch("/games/", {headers, method: method, body })
           .then(res => res.json())
           .then(game => {
@@ -30,7 +30,7 @@ const restartGame = () => {
       const headers = {"Content-Type": "application/json"};
       const method = "POST"
       const body = JSON.stringify({"client_game_id": clientGameId})
-      console.log(body)
+      //console.log(body)
       return fetch("/games/", {headers, method: method, body })
           .then(res => res.json())
           .then(game => {
@@ -133,7 +133,7 @@ const stoneDropped = (sourcePositionId, sourceStatus, targetPositionId,
             const {gameMoves, currentGame} = getState()
             const startOfPendingMoveIndex = gameMoves.lastMovePushIndex + 1
             const lastMovePushIndex = gameMoves.moves.length -1
-            console.log(startOfPendingMoveIndex,lastMovePushIndex)
+            //console.log(startOfPendingMoveIndex,lastMovePushIndex)
             let movesToBePushed = []
             for(let index = startOfPendingMoveIndex; index <= lastMovePushIndex; index++ )
               movesToBePushed.push( {move_from: gameMoves.moves[index].moveFromPositonId,
@@ -149,7 +149,7 @@ const stoneDropped = (sourcePositionId, sourceStatus, targetPositionId,
             const body = JSON.stringify({game_id: currentGame.id,
                                          client_game_id: currentGame.gameId,
                                          moves: movesToBePushed} )
-            console.log(body)
+            //console.log(body)
             return fetch("/games/moves/", {headers, method: method, body })
                 .then(res => res.json())
                 .then(game => {

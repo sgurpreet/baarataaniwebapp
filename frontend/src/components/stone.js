@@ -13,7 +13,7 @@ const stoneSource = {
     return props.player.turn;
   },
   beginDrag(props) {
-    console.log('IsDragging');
+    //console.log('IsDragging');
     props.isStoneDragging();
     const { stoneHolder, player } = props;
     return {stoneHolder, player};
