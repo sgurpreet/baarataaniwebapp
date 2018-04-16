@@ -28,6 +28,16 @@ const SliderController = (state = initSlider(), action) => {
         return new Slider(true,false,SliderChild.STARTGAME);
       }
 
+    case ActionTypes.OPENRESTARTGAME:
+
+        if(state.isSliderOpen === true)
+        {
+          return state;
+        }
+        else {
+          return new Slider(true,false,SliderChild.RESTARTGAME);
+        }
+
     case ActionTypes.OPENHELPFORM:
 
       if(state.isSliderOpen === true)

@@ -18,6 +18,7 @@ const ActionTypes = {
     GAMECOMPLETED: 'game finished',
     CHANGETURN: 'change turn',
     OPENSTARTGAME: 'open start game form',
+    OPENRESTARTGAME: 'open restart game form',
     OPENSETTINGFORM: 'open settings form',
     OPENEDSLIDER: 'opened slider',
     CLOSESLIDER: 'close slider',

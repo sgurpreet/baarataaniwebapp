@@ -1,7 +1,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux'
-import {restartGame, openStartGameSlider, openSettingSlider, openHelpSlider} from '../actions/index.js'
+import {restartGame, openStartGameSlider,openRestartGameSlider, openSettingSlider, openHelpSlider} from '../actions/index.js'
 
 class NavBar extends React.Component {
 
@@ -16,7 +16,7 @@ class NavBar extends React.Component {
 
           <ul>
             <li><a onClick={() => this.props.openStartGameSlider()} >Start Game</a></li>
-            <li><a onClick={() => this.props.restartGame()} >Restart</a></li>
+            {this.props.currentGame != null && <li><a onClick={() => this.props.openRestartGameSlider()} >Restart</a></li>}
             <li style = {{"float": "right"}}><a onClick={() => this.props.openHelpSlider()} >Help</a></li>
           </ul>
 
@@ -32,7 +32,8 @@ class NavBar extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    stoneHolders: state.stonderHolders
+    stoneHolders: state.stonderHolders,
+    currentGame: state.currentGame
   }
 }
  
@@ -40,7 +41,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ restartGame: restartGame,
                               openStartGameSlider: openStartGameSlider,
                               openSettingSlider: openSettingSlider,
-                              openHelpSlider: openHelpSlider
+                              openHelpSlider: openHelpSlider,
+                              openRestartGameSlider: openRestartGameSlider,
                             }, dispatch);
 }
 

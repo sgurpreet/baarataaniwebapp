@@ -8,6 +8,7 @@ class StartGameForm extends React.Component {
     super(props);
 
     this.onColorSelection = this.onColorSelection.bind(this);
+    this.onStonePickerDropDownClickToOpen = this.onStonePickerDropDownClickToOpen.bind(this);
 
     if(this.props.startGame.player1Color == null)
     {
@@ -40,6 +41,12 @@ class StartGameForm extends React.Component {
 
   }
 
+  onStonePickerDropDownClickToOpen(event) {
+    console.log('this is:');
+    const playerId = event.currentTarget.getAttribute("playerid");
+    this.stonePickerContent[playerId-1].style.height = "123px";
+  }
+
   onColorSelection(event) {
     console.log('color selected');
 
@@ -50,6 +57,7 @@ class StartGameForm extends React.Component {
 
     setTimeout(() => {
               console.log('color selected clear');
+              //this.stonePickerContent[playerId-1].blur();
               this.stonePickerContent[playerId-1].style.removeProperty("height");
               //this.stonePickerContentHidden[playerId-1].value = color;
 
@@ -59,7 +67,7 @@ class StartGameForm extends React.Component {
               setValue.call(this.stonePickerContentHidden[playerId-1], color);
               this.stonePickerContentHidden[playerId-1].dispatchEvent(event);
 
-    }, 500);
+    }, 200);
 
 
 
@@ -95,11 +103,10 @@ class StartGameForm extends React.Component {
           {
             return (
               // eslint-disable-next-line
-              <a onClick={this.onColorSelection} key = {index} playerid = {playerId} color = {stoneColor.color} href="#">
-                <li >
+                <li onClick={this.onColorSelection} key = {index} playerid = {playerId} color = {stoneColor.color} >
                   {this.stonePickerItem(stoneColor)}
                 </li>
-              </a>
+              
             );
           }
           else {
@@ -110,7 +117,7 @@ class StartGameForm extends React.Component {
 
       return (
 
-        <div className="stone-picker">
+        <div onClick={this.onStonePickerDropDownClickToOpen} playerid = {playerId} className="stone-picker">
           <div className="wrapper">
               <div ref= {(ref) =>  this.stonePickerContent[playerId-1] = ref} className="content">
                   <ul>

@@ -52,6 +52,15 @@ const openStartGameSlider = () => {
 
 }
 
+const openRestartGameSlider = () => {
+
+    return {
+        type : ActionTypes.OPENRESTARTGAME,
+        payload : null
+    }
+
+}
+
 const openSettingSlider = () => {
 
     return {
@@ -197,5 +206,5 @@ const saveGameDrawMetaData = (gameDrawMeta) => {
 
 export {startGame, restartGame, stoneDropped,gameCompleted,changeTurn,
         openStartGameSlider, openSettingSlider, openedSlider, closeSlider,
-        saveGameDrawMetaData, openHelpSlider, isStoneDragging
+        saveGameDrawMetaData, openHelpSlider, isStoneDragging, openRestartGameSlider
 }

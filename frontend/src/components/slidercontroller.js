@@ -6,6 +6,7 @@ import {SliderChild} from '../helpers/constants.js'
 import {StartGameForm} from './startgameform.js'
 import {HelpForm} from './helpform.js'
 import DeclareWinner from './declarewinner.js'
+import {RestartGameForm} from './restartgameform.js'
 import {restartGame, closeSlider, openedSlider, startGame} from '../actions/index.js'
 
 
@@ -153,6 +154,19 @@ class SliderController extends React.Component {
                         <div className="col-12 row slider-modal-row" style={{"textAlign": "center", "marginTop": "25px", "marginBottom": "25px"}}>
                           <input type="button" onClick={() => this.props.restartGame()} value="Restart"/>
                           <input type="button" onClick={() => this.props.closeSlider()} value="Close"/>
+                        </div>
+                      </div>
+                )
+            }
+
+            { this.props.sliderController.openSlider === true
+              && this.props.sliderController.sliderChild === SliderChild.RESTARTGAME
+              && (
+                      <div style ={{'textAlign': 'center'}} className="row">
+                        <RestartGameForm/>
+                        <div className="col-12 row slider-modal-row" style={{"textAlign": "center", "marginTop": "25px", "marginBottom": "25px"}}>
+                          <input type="button" onClick={() => this.props.restartGame()} value="Yes"/>
+                          <input type="button" onClick={() => this.props.closeSlider()} value="Cancel"/>
                         </div>
                       </div>
                 )
