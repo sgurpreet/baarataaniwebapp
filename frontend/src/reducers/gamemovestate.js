@@ -21,7 +21,8 @@ const GameMoveState = (state = initState, action) => {
         lastMoveTargetPositionId : action.payload.targetPositionId,
         turnScoreCount : (action.payload.vacantPositionId != null &&
                   (action.payload.sourcePositionId === state.lastMoveTargetPositionId
-                    || state.turnScoreCount === 0))?  state.turnScoreCount + 1 : 0
+                    || state.turnScoreCount === 0))?  state.turnScoreCount + 1 : 0,
+        turnMoves: action.payload.turnMoves //used for computer player
       }
 
     case ActionTypes.CHANGETURN:

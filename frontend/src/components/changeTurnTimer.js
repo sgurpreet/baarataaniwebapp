@@ -13,6 +13,11 @@ class ChangeTurnTimer extends React.Component {
 
   }
 
+  resetTimer()
+  {
+    this.setState({secondsRemaining: this.props.autoChangeInSeconds});
+  }
+
   tick(){
     this.setState({secondsRemaining: this.state.secondsRemaining - 1});
     if (this.state.secondsRemaining <= 0) {

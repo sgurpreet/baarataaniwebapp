@@ -24,7 +24,7 @@ const getNextMove = (depth, tree) =>
 {
   let nextMove = alphaBeta(tree, Node.createNode(-1, -25, -1, null),
                   Node.createNode(-1, 25, -1, null), true);
-  console.log(nextMove);
+  //console.log(nextMove);
 
   return findRootMove(depth, nextMove);
 }

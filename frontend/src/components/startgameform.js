@@ -1,5 +1,5 @@
 import React from 'react';
-import {StoneColors} from '../helpers/constants.js'
+import {StoneColors, PlayerType} from '../helpers/constants.js'
 
 
 
@@ -106,7 +106,7 @@ class StartGameForm extends React.Component {
                 <li onClick={this.onColorSelection} key = {index} playerid = {playerId} color = {stoneColor.color} >
                   {this.stonePickerItem(stoneColor)}
                 </li>
-              
+
             );
           }
           else {
@@ -138,6 +138,28 @@ class StartGameForm extends React.Component {
 
     return (
               <React.Fragment>
+              <div className="slider-modal-panel row">
+                <div className="slider-modal-panel-header"> Game Type </div>
+                <div className="slider-modal-row row">
+                  <div className="col-3">
+                    <label>
+                      <input id = "gameTypeOnePlayer" type = 'radio'
+                        value = {PlayerType.COMPUTER}
+                        onChange={this.props.handleStartGameChange}
+                        checked= {this.props.startGame.gameType === PlayerType.COMPUTER}/> Play Computer
+                    </label>
+                  </div>
+                  <div className="col-3">
+                  <label>
+                    <input id = "gameTypeTwoPlayer" type = 'radio'
+                      value = {PlayerType.HUMAN}
+                      onChange={this.props.handleStartGameChange}
+                      checked= {this.props.startGame.gameType === PlayerType.HUMAN}/> Two Player
+                  </label>
+                  </div>
+
+                </div>
+              </div>
                 <div className="slider-modal-panel row">
                   <div className="slider-modal-panel-header"> Player 1 </div>
                   <div className="slider-modal-row row">
@@ -172,7 +194,7 @@ class StartGameForm extends React.Component {
                       <label htmlFor="player2Name">Name</label>
                     </div>
                     <div className="col-3">
-                      <input type="text" id="player2Name" value = {this.props.startGame.player2Name} onChange={this.props.handleStartGameChange}
+                      <input type="text" id="player2Name" disabled = {this.props.startGame.player2NameDisabled} value = {this.props.startGame.player2Name} onChange={this.props.handleStartGameChange}
                             placeholder="Enter Name.."/>
                     </div>
                     <div className="col-2">

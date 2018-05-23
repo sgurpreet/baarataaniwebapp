@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import {Node} from '../actions/forwardLookTree.js'
-import {getNextMove} from '../actions/alphaBetaMinMax.js'
 
 class PlayerSection extends React.Component {
 
@@ -36,21 +34,6 @@ class PlayerSection extends React.Component {
               <li style={{'paddingBottom': lineWidth}}><b>Score:   </b>{this.props.score}</li>
               <li><b>Pending: </b>{this.props.pendingStone}</li>
             </ul>
-
-            <input type="button" onClick={() => {
-                  const depth = 5;
-                  Node.instanceCounter = 0;
-                  let tree = Node.createNode(depth+1, 0, -1, null, null);
-                  Node.generateTree(depth, this.props.playerId, this.props.stoneHolders,0, tree, 0);
-                  console.log(Node.instanceCounter);
-                  console.log(tree);
-                  let nextMove = getNextMove(depth, tree);
-                  console.log(nextMove);
-                  for(let index =0; index < nextMove.moves.length; index++)
-                  {
-                    console.log(nextMove.moves[index]);
-                  }
-                }} value="Generate Tree"/>
 
           </div>
         </div>

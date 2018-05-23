@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux';
 
-import {SliderChild} from '../helpers/constants.js'
+import {SliderChild, PlayerType} from '../helpers/constants.js'
 import {StartGameForm} from './startgameform.js'
 import {HelpForm} from './helpform.js'
 import DeclareWinner from './declarewinner.js'
@@ -17,9 +17,11 @@ class SliderController extends React.Component {
 
     this.state = {
                 startGame : {
+                              gameType: PlayerType.COMPUTER,
                               player1Name: '',
                               player1Color: null,
-                              player2Name:'',
+                              player2Name: 'Computer',
+                              player2NameDisabled: "disabled",
                               player2Color: null,
                               firstTurn: 1
                             }
@@ -33,12 +35,44 @@ class SliderController extends React.Component {
 
   handleStartGameChange(event) {
 
-      if(event.target.id === "player1Name")
+      if(event.target.id === "gameTypeOnePlayer")
       {
         this.setState({startGame :
                         {
+                          gameType: PlayerType.COMPUTER,
+                          player1Name: this.state.startGame.player1Name,
+                          player2Name: "Computer",
+                          player2NameDisabled: "disabled",
+                          player1Color: this.state.startGame.player1Color,
+                          player2Color: this.state.startGame.player2Color,
+                          firstTurn: this.state.startGame.firstTurn
+                        }
+                      }
+                    )
+      }
+      if(event.target.id === "gameTypeTwoPlayer")
+      {
+        this.setState({startGame :
+                        {
+                          gameType: PlayerType.HUMAN,
+                          player1Name: this.state.startGame.player1Name,
+                          player2Name: "",
+                          player2NameDisabled: "",
+                          player1Color: this.state.startGame.player1Color,
+                          player2Color: this.state.startGame.player2Color,
+                          firstTurn: this.state.startGame.firstTurn
+                        }
+                      }
+                    )
+      }
+      else if(event.target.id === "player1Name")
+      {
+        this.setState({startGame :
+                        {
+                          gameType: this.state.startGame.gameType,
                           player1Name: event.target.value,
                           player2Name: this.state.startGame.player2Name,
+                          player2NameDisabled: this.state.startGame.player2NameDisabled,
                           player1Color: this.state.startGame.player1Color,
                           player2Color: this.state.startGame.player2Color,
                           firstTurn: this.state.startGame.firstTurn
@@ -49,8 +83,10 @@ class SliderController extends React.Component {
       else if(event.target.id === "player2Name") {
         this.setState({startGame :
                         {
+                          gameType: this.state.startGame.gameType,
                           player1Name: this.state.startGame.player1Name,
                           player2Name: event.target.value,
+                          player2NameDisabled: this.state.startGame.player2NameDisabled,
                           player1Color: this.state.startGame.player1Color,
                           player2Color: this.state.startGame.player2Color,
                           firstTurn: this.state.startGame.firstTurn
@@ -62,8 +98,10 @@ class SliderController extends React.Component {
       else if(event.target.id === "player1Color") {
         this.setState({startGame :
                         {
+                          gameType: this.state.startGame.gameType,
                           player1Name: this.state.startGame.player1Name,
                           player2Name: this.state.startGame.player2Name,
+                          player2NameDisabled: this.state.startGame.player2NameDisabled,
                           player1Color: event.target.value,
                           player2Color: this.state.startGame.player2Color,
                           firstTurn: this.state.startGame.firstTurn
@@ -76,8 +114,10 @@ class SliderController extends React.Component {
       else if(event.target.id === "player2Color") {
         this.setState({startGame :
                         {
+                          gameType: this.state.startGame.gameType,
                           player1Name: this.state.startGame.player1Name,
                           player2Name: this.state.startGame.player2Name,
+                          player2NameDisabled: this.state.startGame.player2NameDisabled,
                           player1Color: this.state.startGame.player1Color,
                           player2Color: event.target.value,
                           firstTurn: this.state.startGame.firstTurn
@@ -87,13 +127,16 @@ class SliderController extends React.Component {
 
       }
       else if(event.target.id === "isFirstTurn") {
-        let playerId = event.currentTarget.getAttribute("playerid");
+        // eslint-disable-next-line
+        let playerId = parseInt(event.currentTarget.getAttribute("playerid"));
         const isChecked = event.currentTarget.checked;
 
         this.setState({startGame :
                         {
+                          gameType: this.state.startGame.gameType,
                           player1Name: this.state.startGame.player1Name,
                           player2Name: this.state.startGame.player2Name,
+                          player2NameDisabled: this.state.startGame.player2NameDisabled,
                           player1Color: this.state.startGame.player1Color,
                           player2Color: this.state.startGame.player2Color,
                           firstTurn: playerId === 1? (isChecked === true? 1: 2): (isChecked === true? 2: 1)

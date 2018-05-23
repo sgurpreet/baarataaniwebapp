@@ -5,7 +5,7 @@
   --bar-font-size: 1.2em;
   --game-skelton-box-size-width: 150px;
   --game-skelton-box-size-height: 150px;
-  --stone-holder-background-color-over: grey;
+  --stone-holder-background-color-over: #bf6d4d82;
   --stone-holder-background-color-normal: white;
   --stone-holder-position-top: 0px;
   --stone-holder-position-left: 0px;
@@ -20,6 +20,8 @@
   --stone-position-top: 15px; /* --stone-holder-box-size-width/2 -  --stone-box-size-width/2 */
   --stone-position-left: 15px;
   --stone-color: red;
+  --stone-translate-xAxis: 50px;
+  --stone-translate-yAxis: 50px;
 }
 
 * {
@@ -150,6 +152,15 @@ html, body {
 
 }
 
+.slider-modal-row input[type=text]:disabled {
+  background:#80808021;
+}
+
+.slider-modal-row input[type=text]:not(:placeholder-shown) {
+  font-weight: 700;
+}
+
+
 .slider-modal-row input[type=checkbox] {
   width: 20px;
   height:20px;
@@ -213,6 +224,16 @@ html, body {
   top: var(--stone-position-top);
   left: var(--stone-position-left);
   position: absolute;
+
+}
+
+.stone-move {
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  -ms-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s;
+  transform: translate(var(--stone-translate-xAxis), var(--stone-translate-yAxis));
 
 }
 

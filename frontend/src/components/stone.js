@@ -2,14 +2,19 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
-import {ItemTypes} from '.././helpers/constants.js'
+import {ItemTypes, PlayerType} from '.././helpers/constants.js'
 import { DragSource } from 'react-dnd';
 import {isStoneDragging} from '../actions/index.js'
+
 
 
 const stoneSource = {
   canDrag(props) {
     // You can disallow drag based on props
+
+    if(props.player.playerType === PlayerType.COMPUTER)
+      return false;
+
     return props.player.turn;
   },
   beginDrag(props) {
@@ -57,7 +62,8 @@ class Stone extends React.Component {
                             'verticalAlign': 'middle',
                             'background':radialGradient,
                         opacity: isDragging ? 0.5 : 1,
-                        transform: isDragging ? 'scale(1.0)' : 'scale(1.0)'}}
+                        transform: isDragging ? 'scale(1.0)' : 'scale(1.0)'
+                      }}
               stoneid = {player.stoneId}
               playerid = {player.playerId}></figure>
       );

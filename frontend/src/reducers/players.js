@@ -1,24 +1,34 @@
-import {ActionTypes} from '../helpers/constants.js'
+import {ActionTypes, PlayerType} from '../helpers/constants.js'
 
 
 class Player {
-  constructor(playerId,playerName,stoneColor,score,pendingStone, turn){
+  constructor(playerId, playerType, playerName,stoneColor,score,pendingStone, turn){
     this.playerId = playerId;
     this.playerName = playerName;
     this.stoneColor = stoneColor;
     this.score = score;
     this.pendingStone = pendingStone;
     this.turn = turn;
+    this.playerType = playerType
   }
 
 }
 
 const createPlayers = (payload) =>
 {
+  //Player 2 name:
+  if(payload.gameType === PlayerType.COMPUTER)
+  {
+    payload.player2Name = 'Computer'
+  }
+  else if(payload.player2Name === '')
+  {
+    payload.player2Name = 'Player 2'
+  }
   return [
-      new Player (1, payload.player1Name === ''? 'Player 1':payload.player1Name , payload.player1Color, 0,12, payload.firstTurn === 1)
+      new Player (1, PlayerType.HUMAN, payload.player1Name === ''? 'Player 1':payload.player1Name , payload.player1Color, 0,12, payload.firstTurn === 1)
       ,
-      new Player (2, payload.player2Name === ''? 'Player 2':payload.player2Name, payload.player2Color, 0,12, payload.firstTurn === 2)
+      new Player (2, payload.gameType, payload.player2Name, payload.player2Color, 0,12, payload.firstTurn === 2)
 
   ];
 }
@@ -36,6 +46,7 @@ const Players = (state = [], action) => {
 
       return state.map(player => {
         return  new Player(player.playerId,
+                                player.playerType,
                                 player.playerName,
                                 player.stoneColor,
                                 0,12,
@@ -48,6 +59,7 @@ const Players = (state = [], action) => {
       if(action.payload.vacantPositionId == null)
       return state.map(player => {
         return  new Player(player.playerId,
+                                player.playerType,
                                 player.playerName,
                                 player.stoneColor,
                                 player.score,
@@ -59,6 +71,7 @@ const Players = (state = [], action) => {
           if(player.playerId === action.payload.sourceStatus)
           {
             return new Player(player.playerId,
+                                    player.playerType,
                                     player.playerName,
                                     player.stoneColor,
                                     player.score + 1,
@@ -67,6 +80,7 @@ const Players = (state = [], action) => {
           }
           else {
             return new Player(player.playerId,
+                                    player.playerType,
                                     player.playerName,
                                     player.stoneColor,
                                     player.score,
@@ -79,6 +93,7 @@ const Players = (state = [], action) => {
 
         return state.map(player => {
             return new Player(player.playerId,
+                                      player.playerType,
                                       player.playerName,
                                       player.stoneColor,
                                       player.score,

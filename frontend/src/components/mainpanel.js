@@ -3,6 +3,8 @@ import React from 'react';
 import GameBoard from './gameboard.js'
 import SliderController from './slidercontroller.js'
 import {SideSection} from './sidesection.js'
+import PlayComputerTurn from './playComputerTurn.js'
+import MovePlaySound from './moveSoundPlay.js'
 
 class MainPanel extends React.Component {
 
@@ -18,6 +20,8 @@ class MainPanel extends React.Component {
                     <SideSection/>
                   </div>
                 </div>
+                <PlayComputerTurn/>
+                <MovePlaySound/>
               </div>
       );
   }

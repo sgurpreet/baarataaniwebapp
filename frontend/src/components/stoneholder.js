@@ -60,6 +60,25 @@ function collect(connect, monitor) {
 
 class StoneHolder extends React.Component {
 
+  componentDidUpdate()
+  {
+
+    if(this.props.positionId === this.props.gameMoveState.lastMoveSourcePositionId)
+      {
+
+
+        let stoneHolder = document.querySelectorAll("div[position='" +
+                                      this.props.positionId +"']")[0]
+
+        //console.log(stoneHolder);
+        stoneHolder.classList.remove('stone-move');
+        //console.log(stoneHolder);
+        //stoneHolder.style.removeProperty('transform');
+        //stoneHolder.style.removeProperty('--stone-translate-yAxis');
+    }
+
+  }
+
   renderStoneHolder(isOver, connectDropTarget) {
 
     const lineWidth       = this.props.drawMetaData.lineWidth; // eslint-disable-next-line
@@ -79,7 +98,10 @@ class StoneHolder extends React.Component {
 
     return connectDropTarget(
 
-      <div position= {this.props.positionId} style = {{ 'top':(top).toString().concat('px')
+      <div position= {this.props.positionId}
+                    xaxis = {(left).toString()}
+                    yaxis = {(top).toString()}
+                    style = {{ 'top':(top).toString().concat('px')
                                      ,'left':(left).toString().concat('px')
                                      ,'height': stoneHolderHeight
                                      ,'width': stoneHolderWidth

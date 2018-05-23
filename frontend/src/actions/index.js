@@ -108,13 +108,13 @@ const isStoneDragging = () => {
 
 
 const stoneDropped = (sourcePositionId, sourceStatus, targetPositionId,
-        vacantPositionId) => {
+        vacantPositionId, turnMoves = null) => {
 
   return (dispatch, getState) => {
     dispatch(
       {
           type : ActionTypes.STONEDROPPED,
-          payload : {sourcePositionId, sourceStatus, targetPositionId, vacantPositionId}
+          payload : {sourcePositionId, sourceStatus, targetPositionId, vacantPositionId, turnMoves}
       }
     )
 

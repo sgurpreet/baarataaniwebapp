@@ -9,6 +9,16 @@ const StoneHolderStatus = {
   PLAYER2: 2
 }
 
+const GamePlayerCount = {
+  ONEPLAYER: 1,
+  TWOPLAYER: 2
+}
+
+const PlayerType  = {
+  HUMAN: 1,
+  COMPUTER: 2
+}
+
 const ActionTypes = {
 
     RESTARTGAME : 'restart game',
@@ -76,7 +86,7 @@ const SliderChild = {
 }
 
 
-const StoneColors =[{color:"#4169E1", name: "Blue"},  
+const StoneColors =[{color:"#4169E1", name: "Blue"},
                     {color:"#FFD700", name: "Gold"},
                     {color:"#FF00FF", name: "Magenta"},
                     {color:"#800080", name: "Purple"},
@@ -95,4 +105,5 @@ const StoneColors =[{color:"#4169E1", name: "Blue"},
 
 export {ItemTypes, StoneHolderStatus, ActionTypes,
           AllowedMovesSequence, ReverseAllowedMovesSequence,
-          GameStatus, SliderChild, StoneColors}
+          GameStatus, SliderChild, StoneColors,
+          GamePlayerCount, PlayerType}
