@@ -160,12 +160,13 @@ html, body {
   font-weight: 700;
 }
 
-
+/*
 .slider-modal-row input[type=checkbox] {
   width: 20px;
   height:20px;
 
 }
+*/
 
 .slider-modal-row input[type=text]:focus {
   border-color: var(--default-color);
@@ -173,7 +174,7 @@ html, body {
 }
 
 .slider-modal-row label {
-  padding: 12px 12px 12px 12px;
+  padding: 20px 0px 3px 2px;
   display: inline-block;
 
 }
@@ -533,9 +534,16 @@ html, body {
     box-shadow: 0px 12px 7px -7px rgba(0,0,0,0.3);
   }
 
-  .slider-modal-row input[type=checkbox] {
-    width: 35px;
-    height:35px;
+  .slider-modal-row label {
+    padding: 12px 12px 12px 12px;
+    display: inline-block;
+
+  }
+
+ .slider-modal-row input[type=checkbox] {
+    margin-top: 13px;
+    /*width: 35px;
+    height:35px;*/
 
   }
 

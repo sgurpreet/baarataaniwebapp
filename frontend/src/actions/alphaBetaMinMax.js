@@ -1,9 +1,23 @@
 import {Node} from '../actions/forwardLookTree.js'
 
+let randomChoice = null;
+
+const findNextRandomChoice = () =>
+{
+  if(Math.random() <= 0.55)
+    return 0;
+  else
+    return 1;
+}
+
 const findMaxNode = (nodeA, nodeB) =>
 {
   if(nodeA.reward > nodeB.reward)
     return nodeA;
+  else if (nodeA.reward === nodeB.reward)
+  {
+    return randomChoice === 1? nodeA : nodeB;
+  }
   else {
     return nodeB;
   }
@@ -14,6 +28,10 @@ const findMinNode = (nodeA, nodeB) =>
 {
   if(nodeA.reward < nodeB.reward)
     return nodeA;
+  else if (nodeA.reward === nodeB.reward)
+  {
+    return randomChoice === 1? nodeA : nodeB;
+  }
   else {
     return nodeB;
   }
@@ -22,6 +40,9 @@ const findMinNode = (nodeA, nodeB) =>
 
 const getNextMove = (depth, tree) =>
 {
+
+  randomChoice = findNextRandomChoice ();
+  console.log(randomChoice);
   let nextMove = alphaBeta(tree, Node.createNode(-1, -25, -1, null),
                   Node.createNode(-1, 25, -1, null), true);
   //console.log(nextMove);

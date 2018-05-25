@@ -23,7 +23,8 @@ const getPlayer = (status, players) => {
 const stoneHolderFn = (stoneHolder, player, drawMetaData, actualLineWidth) => {
   return (
         <StoneHolder key = {stoneHolder.positionId} index = {stoneHolder.positionId}
-                    positionId = {stoneHolder.positionId} drawMetaData = {drawMetaData} actualLineWidth = {actualLineWidth}>
+                    positionId = {stoneHolder.positionId} status = {stoneHolder.status}
+                    drawMetaData = {drawMetaData} actualLineWidth = {actualLineWidth}>
           {
             player != null && <Stone player ={player} stoneHolder = {stoneHolder} lineWidth={drawMetaData.lineWidth} />
           }

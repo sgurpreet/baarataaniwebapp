@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {ItemTypes, PlayerType} from '.././helpers/constants.js'
 import { DragSource } from 'react-dnd';
 import {isStoneDragging} from '../actions/index.js'
-
+import { getEmptyImage } from 'react-dnd-html5-backend'
 
 
 const stoneSource = {
@@ -20,8 +20,8 @@ const stoneSource = {
   beginDrag(props) {
     //console.log('IsDragging');
     props.isStoneDragging();
-    const { stoneHolder, player } = props;
-    return {stoneHolder, player};
+    const { stoneHolder, player, lineWidth } = props;
+    return {stoneHolder, player, lineWidth};
   }
 };
 
@@ -39,11 +39,32 @@ function collect(connect, monitor) {
 class Stone extends React.Component {
 
   componentDidMount() {
+		// Use empty image as a drag preview so browsers don't draw it
+		// and we can draw whatever we want on the custom drag layer instead.
+		this.props.connectDragPreview(getEmptyImage(), {
+			// IE fallback: specify that we'd rather screenshot the node
+			// when it already knows it's being dragged so we can hide it with CSS.
+			captureDraggingState: true,
+		})
+	}
 
 
+  shouldComponentUpdate(nextProps, nextState )
+  {
+    // Not working well with touch
+    /*if(nextProps.status !== this.props.status
+      || nextProps.isDragging === true
+      || this.props.isDragging === true)
+      return true;
+    else
+      return false;*/
+    return true;
   }
 
   render() {
+
+      //console.log('Stone Holder Called.');
+      //console.log('isDragging: ' + this.props.isDragging);
       // eslint-disable-next-line
       const { connectDragSource, isDragging, stoneHolder, player, lineWidth} = this.props;
 

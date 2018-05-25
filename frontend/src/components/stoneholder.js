@@ -116,11 +116,24 @@ class StoneHolder extends React.Component {
 
   }
 
+  shouldComponentUpdate(nextProps, nextState )
+  {
+    // Not working well with touch
+    /*if(nextProps.status !== this.props.status
+      || this.props.positionId === this.props.gameMoveState.lastMoveTargetPositionId
+      || (nextProps.isOver !== this.props.isOver))
+      return true;
+    else
+      return false;*/
+      return true;
+  }
+
   render() {
 
       const { connectDropTarget, isOver} = this.props;
 
       //console.log('Holder: ' + this.props.positionId);
+      //console.log('isOver: ' + this.props.isOver);
 
       return this.renderStoneHolder(isOver, connectDropTarget);
 
