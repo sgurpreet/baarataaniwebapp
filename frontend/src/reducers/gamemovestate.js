@@ -25,6 +25,8 @@ const GameMoveState = (state = initState, action) => {
         turnMoves: action.payload.turnMoves //used for computer player
       }
 
+    case ActionTypes.RESTARTGAME:
+    case ActionTypes.STARTGAME:
     case ActionTypes.CHANGETURN:
       return initState;
 
