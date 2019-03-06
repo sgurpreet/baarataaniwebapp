@@ -16,5 +16,22 @@ const generatePattern = (stoneHolders) =>
   return pattern;
 }
 
+const disableScroll = () => {
 
-export {generateGuid, generatePattern}
+  document.ontouchmove = function(e) {
+    e.preventDefault();
+  }
+
+}
+
+const enableScroll = () => {
+
+  document.ontouchmove = function(e) {
+    return true;
+  }
+
+}
+
+
+
+export {generateGuid, generatePattern, disableScroll, enableScroll}

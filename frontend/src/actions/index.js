@@ -106,6 +106,23 @@ const isStoneDragging = () => {
 
 }
 
+const inValidMoveAttempted = (sourceStatus, sourcePositionId, targetPositionId) => {
+
+    return {
+        type : ActionTypes.INVALIDMOVEATTEMPT,
+        payload : {sourceStatus, sourcePositionId, targetPositionId}
+    }
+
+}
+
+const moveActionCompleted = () => {
+
+    return {
+        type : ActionTypes.MOVEACTIONCOMPLETED,
+        payload : null
+    }
+
+}
 
 const stoneDropped = (sourcePositionId, sourceStatus, targetPositionId,
         vacantPositionId, turnMoves = null) => {
@@ -206,5 +223,6 @@ const saveGameDrawMetaData = (gameDrawMeta) => {
 
 export {startGame, restartGame, stoneDropped,gameCompleted,changeTurn,
         openStartGameSlider, openSettingSlider, openedSlider, closeSlider,
-        saveGameDrawMetaData, openHelpSlider, isStoneDragging, openRestartGameSlider
+        saveGameDrawMetaData, openHelpSlider, isStoneDragging, openRestartGameSlider,
+        inValidMoveAttempted, moveActionCompleted
 }

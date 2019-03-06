@@ -19,6 +19,13 @@ const PlayerType  = {
   COMPUTER: 2
 }
 
+const LastMoveState = {
+  NoMove: 0,
+  ValidMove: 1,
+  InValidMove: 2,
+  MoveActionCompleted: 3
+}
+
 const ActionTypes = {
 
     RESTARTGAME : 'restart game',
@@ -37,7 +44,9 @@ const ActionTypes = {
     RECORDMOVE: 'Record a move',
     RECORDEDMOVEPUSHED: 'Recorded move pushed',
     OPENHELPFORM: 'Help form',
-    ISDRAGGING: 'Is dragging'
+    ISDRAGGING: 'Is dragging',
+    INVALIDMOVEATTEMPT: 'is invalid move attempt',
+    MOVEACTIONCOMPLETED: 'action completed for move'
 }
 
 const GameStatus = {
@@ -106,4 +115,4 @@ const StoneColors =[{color:"#4169E1", name: "Blue"},
 export {ItemTypes, StoneHolderStatus, ActionTypes,
           AllowedMovesSequence, ReverseAllowedMovesSequence,
           GameStatus, SliderChild, StoneColors,
-          GamePlayerCount, PlayerType}
+          GamePlayerCount, PlayerType, LastMoveState}

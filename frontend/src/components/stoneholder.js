@@ -6,13 +6,13 @@ import { DropTarget } from 'react-dnd';
 
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux'
-import {stoneDropped,gameCompleted} from '../actions/index.js'
+import {stoneDropped,gameCompleted, inValidMoveAttempted} from '../actions/index.js'
 import {canMakeMove, moveScorePosition,isGameCompleted} from '../actions/game.js'
 
 const stoneTarget = {
   canDrop(props, monitor){
 
-    const source = monitor.getItem();
+    //const source = monitor.getItem();
 
     //console.log("Can Drop Check.");
 
@@ -20,16 +20,28 @@ const stoneTarget = {
     if(props.dragDropState.isDragging === false)
       return false;
 
-    return canMakeMove(source.player, props.stoneHolders, source.stoneHolder.positionId,
-              source.stoneHolder.status, props.positionId, props.currentGame.status, props.gameMoveState)
+    //console.log("Can Drop Check.");
+
+    return true;
 
   },
   drop(props, monitor) {
+
     //console.log("Dropped");
 
     const source  = monitor.getItem();
 
-    //console.log("Dropped1");
+    const isValidMove = canMakeMove(source.player, props.stoneHolders, source.stoneHolder.positionId,
+              source.stoneHolder.status, props.positionId, props.currentGame.status, props.gameMoveState)
+
+    if(isValidMove === false)
+    {
+      props.inValidMoveAttempted(source.stoneHolder.status, source.stoneHolder.positionId, props.positionId);
+
+      return;
+    }
+
+    //console.log("Valid Move");
 
     const vacantPositionId = moveScorePosition(props.stoneHolders, source.stoneHolder.positionId,
               source.stoneHolder.status, props.positionId, props.currentGame.status, props.gameMoveState)
@@ -157,7 +169,9 @@ const mapStateToProps = state => {
 }
 
  const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({stoneDropped: stoneDropped, gameCompleted: gameCompleted}, dispatch);
+  return bindActionCreators({stoneDropped: stoneDropped,
+                              gameCompleted: gameCompleted,
+                              inValidMoveAttempted: inValidMoveAttempted}, dispatch);
 }
 
 

@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 
 import GameSkelton from './gameskelton.js'
 import GameLoader from './gameloader.js'
+//import {disableScroll, enableScroll} from '../helpers/utils.js'
 
 import {saveGameDrawMetaData} from '../actions/index.js'
 
@@ -17,6 +18,73 @@ class GameBoard extends React.Component {
     this.state = {isMetaDataAvailable: false};
 
   }
+
+  componentWillMount() {
+    //React.initializeTouchEvents(true);
+
+  }
+
+/*
+  handleTouchStart(e)
+  {
+
+    this.setState({...this.state,
+                    touchEvent:'Touch Start',
+                    isTouchEnabled: false})
+
+  }
+
+  handleTouchEnd()
+  {
+
+    if(this.state.isTouchEnabled == true)
+    {
+      enableScroll();
+      this.setState({...this.state,
+                      touchEvent:'Touch End',
+                      isTouchEnabled: false})
+    }
+    else {
+      this.setState({...this.state, touchEvent:'Touch End' })
+    }
+  }
+
+  handleTouchCancel()
+  {
+
+    if(this.state.isTouchEnabled == true)
+    {
+      enableScroll();
+      this.setState({...this.state,
+                      touchEvent:'Touch Cancel',
+                      isTouchEnabled: false})
+    }
+    else {
+      this.setState({...this.state, touchEvent:'Touch Cancel' })
+    }
+
+    console.log('Touch Cancel');
+    window.onscroll = function () {};
+  }
+
+  handleTouchMove(e)
+  {
+    if(this.state.isTouchEnabled == false)
+    {
+      disableScroll();
+      this.setState({...this.state,
+                      touchEvent:'Touch Move',
+                      isTouchEnabled: true})
+    }
+    else {
+        this.setState({...this.state, touchEvent:'Touch Move' })
+    }
+
+
+    console.log('Touch Move');
+
+  }
+*/
 
   componentDidMount() {
 
@@ -76,7 +144,12 @@ class GameBoard extends React.Component {
 
     return (
 
-        <div id="gamesection" ref= {(ref) =>  this.gameSectionRef = ref} className="col-9 game-skelton-board">
+        <div id="gamesection" /*onTouchEnd=   {() => this.handleTouchEnd()}
+                              onTouchStart= {(e) => this.handleTouchStart(e)}
+                              onTouchCancel={() => this.handleTouchCancel()}
+                              onTouchMove=  {(e) => this.handleTouchMove(e)}*/
+                              ref= {(ref) =>  this.gameSectionRef = ref}
+                              className="col-9 game-skelton-board">
           {this.state.isMetaDataAvailable && <GameSkelton drawMetaData = {this.state} />}
           {this.state.isMetaDataAvailable && <GameLoader drawMetaData = {this.state}/>}
         </div>

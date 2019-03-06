@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {Node} from '../actions/forwardLookTree.js'
 import {getNextMove} from '../actions/alphaBetaMinMax.js'
 // eslint-disable-next-line
-import {PlayerType, GameStatus, StoneHolderStatus} from '.././helpers/constants.js'
+import {PlayerType, GameStatus, StoneHolderStatus, LastMoveState} from '.././helpers/constants.js'
 
 import {bindActionCreators} from 'redux';
 // eslint-disable-next-line
@@ -40,6 +40,10 @@ class PlayComputerTurn extends React.Component {
     const player = this.props.players.find( _ => _.turn === true);
 
     if(player.playerType !== PlayerType.COMPUTER)
+        return;
+
+    if(this.props.gameMoveState.lastMoveState !== LastMoveState.NoMove
+        && this.props.gameMoveState.lastMoveState !== LastMoveState.MoveActionCompleted)
         return;
 
 

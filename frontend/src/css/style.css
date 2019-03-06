@@ -182,6 +182,7 @@ html, body {
 .game-skelton-board {
   position: relative;
   margin-left: 3px;
+  touch-action: none;
 }
 
 .game-skelton {
